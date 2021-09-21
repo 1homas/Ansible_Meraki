@@ -1,0 +1,58 @@
+---
+#------------------------------------------------------------------------------
+# Ansible_Meraki_Show
+# 
+# Shows basic Cisco Meraki information
+#  * organization(s)
+#  * admin(s)
+#  * network(s)
+#  * device(s)
+# 
+# Assumes AWS_* environment variables for task authentication:
+#    export MERAKI_KEY='EXAMPLE+KEYc320e12ee407159487a4cabc41abb'
+# 
+# Run with `ansible-playbook show.yaml`
+#
+#------------------------------------------------------------------------------
+
+
+- name: Show Meraki Admins, Organizations, Networks, and Devices
+  hosts: localhost
+  vars:
+    meraki_org_name: thomas
+    meraki_net_name: Lab
+    # meraki_device_serial_numbers: 
+    # - ABCD-EFGH-1234
+  gather_facts: no
+  tasks:
+
+
+  - name: Show meraki_admin
+    ansible.builtin.include_tasks: tasks/meraki_admin.query.yaml
+    tags: 
+      - show
+      - meraki_admin
+
+
+  - name: Show meraki_admin
+    ansible.builtin.include_tasks: tasks/meraki_organization.query.yaml
+    tags: 
+      - show
+      - meraki_organization
+
+
+  - name: Show meraki_network
+    ansible.builtin.include_tasks: tasks/meraki_network.query.yaml
+    tags: 
+      - show
+      - meraki_network
+
+
+  - name: Show meraki_device
+    ansible.builtin.include_tasks: tasks/meraki_device.query.yaml
+    tags: 
+      - show
+      - meraki_device
+
+
+...

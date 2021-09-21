@@ -1,0 +1,20 @@
+---
+
+
+  - name: Get all organizations associated to user's authentication key
+    delegate_to: localhost
+    cisco.meraki.meraki_organization:
+      state: query
+    register: orgs
+
+  - name: Set org_names
+    vars:
+      query: "[*].name"
+    ansible.builtin.set_fact: 
+      org_names: "{{ orgs.data | community.general.json_query(query) }}"
+
+  - name: Show Org Names
+    ansible.builtin.debug: var=org_names
+
+
+...

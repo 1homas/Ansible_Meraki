@@ -1,0 +1,22 @@
+---
+
+
+  - name: Get all networks associated with the organization
+    delegate_to: localhost
+    cisco.meraki.meraki_network:
+      org_name: "{{ meraki_org_name }}"
+      # net_name: "{{ meraki_net_name }}"
+      state: query
+    register: networks
+
+  - name: Set network_names
+    vars:
+      query: "[*].name"
+    ansible.builtin.set_fact: 
+      network_names: "{{ networks.data | community.general.json_query(query) }}"
+
+  - name: Show network_names
+    ansible.builtin.debug: var=network_names
+
+
+...

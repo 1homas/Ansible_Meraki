@@ -1,0 +1,20 @@
+---
+
+  - name: Get administrators associated to the organization
+    cisco.meraki.meraki_admin:
+      org_name: "{{ meraki_org_name }}"
+      state: query
+    delegate_to: localhost
+    register: admins
+
+  - name: Set admin emails
+    vars:
+      query: "[*].email"
+    ansible.builtin.set_fact: 
+      admin_emails: "{{ admins.data | community.general.json_query(query) }}"
+
+  - name: Show administrators' email addresses
+    ansible.builtin.debug: var=admin_emails
+
+
+...

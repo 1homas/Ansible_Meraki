@@ -1,0 +1,53 @@
+---
+
+
+  - name: Get All Devices in the Organization
+    delegate_to: localhost
+    cisco.meraki.meraki_device:
+      state: query
+      # ▼ ▼ ▼ query parameters ▼ ▼ ▼
+      org_name: "{{ meraki_org_name }}"
+      # net_name: "{{ meraki_net_name }}"
+      # hostname: main-switch
+      # model: main-switch
+      # serial: abc123
+    register: devices
+    tags:
+      - show
+      - meraki_device
+
+
+  - name: Show devices
+    ansible.builtin.debug: var=devices
+    tags:
+      - show
+      - meraki_device
+
+
+  - name: Set serials
+    vars:
+      query: "[*].serial"
+    ansible.builtin.set_fact: 
+      serials: "{{ devices.data | community.general.json_query(query) }}"
+    tags:
+      - show
+      - meraki_device
+
+
+  - name: Show device serial numbers
+    ansible.builtin.debug: var=serials
+    tags:
+      - show
+      - meraki_device
+
+
+  # - name: Show devices
+  #   loop: "{{ devices.data }}"
+  #   ansible.builtin.debug: 
+  #     msg: "{{ item.serial }} | {{ item.model }} | {{ item.name }}"
+  #   tags:
+  #     - show
+  #     - meraki_device
+
+
+...

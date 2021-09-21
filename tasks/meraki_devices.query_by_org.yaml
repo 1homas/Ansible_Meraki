@@ -1,0 +1,24 @@
+---
+
+
+- name: Query all devices in an ▶ Organization ◀
+  delegate_to: localhost
+  cisco.meraki.meraki_device:
+    org_name: "{{ meraki_org_name }}"
+    state: query
+  register: result
+
+- name: result
+  ansible.builtin.debug: var=result
+
+- name: List Names
+  vars:
+    query: "[*].name"
+  ansible.builtin.set_fact: 
+    names: "{{ result.data | community.general.json_query(query) }}"
+
+- name: names
+  ansible.builtin.debug: var=names
+
+
+...
