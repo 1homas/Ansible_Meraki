@@ -21,8 +21,6 @@
   vars:
     meraki_org_name: thomas
     # meraki_net_name: Lab
-    # meraki_device_serial_numbers: 
-    # - ABCD-EFGH-1234
   gather_facts: no
   tasks:
   roles:

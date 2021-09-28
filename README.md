@@ -1,10 +1,6 @@
-# Ansible_Meraki_Show
+# Ansible with Meraki
 
-Shows basic Cisco Meraki information using Ansible:
-- organization(s)
-- admin(s)
-- network(s)
-- device(s)
+Basic Ansible roles and playbooks for working with Cisco Meraki organizations, admins, networks, and devices.
 
 
 
@@ -30,19 +26,18 @@ Shows basic Cisco Meraki information using Ansible:
 
     > 💡 If you have any problems installing Python or Ansible, see [Installing Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).
 
-2. Export your Meraki authentication key into your terminal environment:  
+2. Export your [Meraki Dashboard API key](https://documentation.meraki.com/General_Administration/Other_Topics/Cisco_Meraki_Dashboard_API) into your terminal environment:  
 
     ```bash
     export MERAKI_KEY='EXAMPLE+KEYc320e12ee407159487a4cabc41abb'
     ```
 
-3. Edit the `show*.yaml` files and change the variable `meraki_org_name` to match your organization.
+3. Edit the `show.yaml` file and change the variable `meraki_org_name` to match *your* organization. 
 
-4. Run the Ansible playbooks (they have the same output but a different structure).  
+4. Run the Ansible playbook(s).  
 
     ```bash
     ansible-playbook show.yaml
-    ansible-playbook show.include_tasks.yaml
     ```
 
 
